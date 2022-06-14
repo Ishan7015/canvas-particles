@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+canvas{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    background: rgb(255, 199, 136);
+    background: radial-gradient(circle, rgba(255, 199, 136, 1) 0%, rgba(255, 198, 66, 1) 100%);
+}
+
+input{
+    position: absolute;
+    z-index: 9;
+    width: 120px;
+    text-align: center;
+    top: 20px;
+    left: 20px;
+    opacity: 0.5;
+}
+
+input:hover{
+    opacity: 1;
+}
+
+input:focus{
+    opacity: 1;
+}
