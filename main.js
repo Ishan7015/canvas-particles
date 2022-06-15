@@ -1,6 +1,27 @@
 const canvas = document.querySelector('canvas');
 const input = document.querySelector('#input');
+const bgColor = document.querySelector('.bg-color');
+const particleColor = document.querySelector('.particle-color');
 const c = canvas.getContext('2d');
+
+let g1, g2;
+let pCol = '#4d4b49';
+
+//Function to convert hex to rgb
+const hexToRgb = hex =>
+  hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+             ,(m, r, g, b) => '#' + r + r + g + g + b + b)
+    .substring(1).match(/.{2}/g)
+    .map(x => parseInt(x, 16))
+
+bgColor.addEventListener('input', (e) => {
+    let colArr = hexToRgb(e.target.value);
+    g1 = `rgba(${colArr[0]}, ${colArr[1]}, ${colArr[2]}, 1)`;
+    g2 = `rgba(${colArr[0]}, ${colArr[1]}, ${colArr[2]}, 0.5)`;
+    console.log(g1);
+    console.log(g2);
+    canvas.style.background = `radial-gradient(circle, ${g2} 0%, ${g1} 100%)`;
+})
 
 //Canvas Resizing function
 const resizeCanvas = () => {
@@ -30,12 +51,10 @@ let particleNumber = 50;
 //Array to store particles
 let particleArray = [];
 
-
 window.addEventListener('mousemove', (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
 });
-
 
 //Funtion to create n particles
 const createParticle = (n) => {
@@ -45,7 +64,7 @@ const createParticle = (n) => {
         let y = getRandomInteger(radius, innerHeight-radius);
         let dx = getRandomInteger(-2, 2);
         let dy = getRandomInteger(-2, 2);
-        let color = '#4d4b49';
+        let color = pCol;
         particleArray.push(new Particle(x, y, dx, dy, radius, color))
     }
 }
@@ -57,6 +76,7 @@ const connect = () => {
             let distance = getDistance(particleArray[a].x, particleArray[a].y, particleArray[b].x, particleArray[b].y);
             if (distance < 100) { 
                 opacity = 1 - (distance / 110);
+                c.strokeStyle = ``
                 c.strokeStyle = 'rgba(140, 85, 31,' + opacity + ')';
                 c.beginPath();
                 c.moveTo(particleArray[a].x, particleArray[a].y);
@@ -97,6 +117,17 @@ function Particle(x, y, dx, dy, radius, color) {
             this.dx = -this.dx;
         if (this.y + this.radius > innerHeight || this.y - this.radius < 0)
             this.dy = -this.dy;
+        let mouseDist = getDistance(mouse.x, mouse.y, this.x, this.y);
+        // if (mouseDist < 100) {
+        //     if (mouse.x > this.x && this.x - this.radius > 5)
+        //         this.x -= 15;
+        //     if (mouse.x < this.x && this.x + this.radius > innerWidth-5)
+        //         this.x += 15;
+        //     if (mouse.y > this.y && this.y - this.radius > 5)
+        //         this.y -= 15;
+        //     if (mouse.y < this.y && this.y + this.radius > innerHeight-5)
+        //         this.x += 15;
+        // }
         
         this.x += this.dx;
         this.y += this.dy;

@@ -9,10 +9,11 @@ canvas{
     padding: 0;
     margin: 0;
     background: rgb(255, 199, 136);
-    background: radial-gradient(circle, rgba(255, 199, 136, 1) 0%, rgba(255, 198, 66, 1) 100%);
+    /* background: radial-gradient(circle, rgba(255, 199, 136, 1) 0%, rgba(255, 198, 66, 1) 100%); */
+    background: radial-gradient(circle, rgba(255, 198, 66, 0.5) 0%, rgba(255, 198, 66, 1) 100%);
 }
 
-input{
+.particleNumber{
     position: absolute;
     z-index: 9;
     width: 120px;
@@ -22,10 +23,54 @@ input{
     opacity: 0.5;
 }
 
-input:hover{
+.particleNumber:hover{
     opacity: 1;
 }
 
-input:focus{
+.particleNumber:focus{
+    opacity: 1;
+}
+
+/* .particle-color{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 8;
+    top: 50px;
+    left: 20px;
+    opacity: 0.2;
+}
+
+.particle-color input{
+    cursor: pointer;
+}
+
+.particle-color:hover{
+    opacity: 1;
+}
+
+.particle-color:focus{
+    opacity: 1;
+} */
+
+.bg-color input{
+    cursor: pointer;
+}
+
+.bg-color{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 7;
+    left: 20px;
+    top: 50px;
+    opacity: 0.2;
+}
+
+.bg-color:hover{
+    opacity: 1;
+}
+
+.bg-color:focus{
     opacity: 1;
 }
